@@ -19,8 +19,11 @@ async def translate_with_source(event):
     source_lang = event.pattern_match.group(1)
     target_lang = event.pattern_match.group(2)
     text = event.pattern_match.group(3)
+
     full_text = '\n'.join(event.raw_text.splitlines()[1:])
+
     translated = await translator.translate(full_text, src=source_lang, dest=target_lang)
     await event.edit(f"{translated.text}")
 
+client.start()
 client.run_until_disconnected()
